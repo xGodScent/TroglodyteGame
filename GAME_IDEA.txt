@@ -1,0 +1,24 @@
+--Game idea: Troglodyte--
+
+Meaning of Troglodyte: a hermit - > a hummingbird found in the shady lower layers of tropical forests, foraging along a regular route.
+
+-Story:
+You're an astronaut, you had a big party last night. You leave early because you have cleaning routine tomorrow.
+You go to sleep. You wake up: you're the only person left on the space ship. Everyone seems to have dissapeared.
+
+You want to find out why everbody is gone.
+So you start investigating by trying to find pictures, clues etc to find out what happened last night.
+-First findings in your room:
+ -> Picture of you and your friends last night.
+
+
+
+-Scenery:
+ -> Start : Room -> Space ship
+
+
+-Graphics:
+ -> 2D
+ -> Pixel art type shit
+ -> Pretty simple, something like: https://ih1.redbubble.net/image.1114877579.6415/farp,small,wall_texture,product,750x1000.u2.jpg
+ -> 
