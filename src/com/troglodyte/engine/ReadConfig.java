@@ -7,7 +7,7 @@ import java.io.IOException;
 public class ReadConfig {
 	
 	// this will read the config files and apply them to the game
-	public ReadConfig(GameContainer gc) 
+	public ReadConfig(GameContainer gc)
 	{
 		
 		BufferedReader br;
@@ -42,16 +42,17 @@ public class ReadConfig {
 				}
 				
 				
+				// set keybinds
+				
+				
 			}
 			
 			br.close();
 			
-			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("// Error: Couldn\'t read config file.\n\n" + LinesGoBrr(50) + "\n");
-			e.printStackTrace();
+			System.out.println("\n// [!] Warning: Config file may not have been read correctly.\n\n" + LinesGoBrr(50) + "\n");
 		}
 		
 		

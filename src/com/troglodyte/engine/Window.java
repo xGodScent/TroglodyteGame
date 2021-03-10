@@ -5,9 +5,11 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -40,6 +42,14 @@ public class Window {
 		canvas.setMaximumSize(windowSize);
 		canvas.setPreferredSize(windowSize);
 		
+		// chnage window to full screen if read in config file
+		if (gc.getFullscreen() == 1) {
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+			frame.setUndecorated(true);
+		}
+		
+		// set game icon
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(".\\resources\\icons\\game_icon.png"));
 		
 		// add canvas to jframe window
 		frame.add(canvas, BorderLayout.CENTER);
@@ -51,6 +61,7 @@ public class Window {
 		frame.setVisible(true);
 		
 		
+		// final stuff
 		canvas.createBufferStrategy(2);			// 2 buffers to render to
 		bstrat = canvas.getBufferStrategy();	// bstrat type shit
 		g = bstrat.getDrawGraphics();			// get graphics we need to draw
