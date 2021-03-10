@@ -16,6 +16,8 @@ public class GameContainer implements Runnable {
 	// renderer obj type shit
 	private Renderer renderer;
 	
+	private ReadConfig readconfig;
+	
 	// sets game vars
 	private boolean running = false;		// makes sure we're not running the game yet
 	private final double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
@@ -35,6 +37,11 @@ public class GameContainer implements Runnable {
 	
 	public void start() 
 	{
+		
+		readconfig = new ReadConfig(this);
+		
+		
+		// real shit
 		window = new Window(this);		// create window for THIS game
 		renderer = new Renderer(this);	// create renderer for THIS game
 		
