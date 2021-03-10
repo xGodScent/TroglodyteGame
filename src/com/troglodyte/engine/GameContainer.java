@@ -21,6 +21,7 @@ public class GameContainer implements Runnable {
 	// sets game vars
 	private boolean running = false;		// makes sure we're not running the game yet
 	private double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
+	private int MAXFPS = 60;
 	private String version = "0.0.1";
 	
 	// window vars
@@ -214,6 +215,16 @@ public class GameContainer implements Runnable {
 
 	public void setFullscreen(int fullscreen) {
 		this.fullscreen = fullscreen;
+	}
+
+
+	public int getMAXFPS() {
+		return MAXFPS;
+	}
+
+
+	public void setMAXFPS(int mAXFPS) {
+		MAXFPS = mAXFPS;
 	}
 	
 	

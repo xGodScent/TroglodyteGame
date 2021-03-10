@@ -17,7 +17,7 @@ public class ReadConfig {
 			br = new BufferedReader(new FileReader(".\\config\\player\\config.cfg"));
 			
 			String line = br.readLine();
-			while (line != null) 
+			while (line != null)
 			{
 				line = br.readLine();
 				
@@ -26,17 +26,17 @@ public class ReadConfig {
 					gc.setScale( (float) GetArg(line) );
 				}
 				
-//				if (line.startsWith("fps_max=")) 
-//				{
-//					gc.setScale(GetArg(line));
-//				}
-				
-				if (line.startsWith("tps=")) 
+				else if (line.startsWith("fps_max=")) 
 				{
-					gc.setTPS(  1/(GetArg(line))  );
+					gc.setMAXFPS( (int) (GetArg(line)) );
 				}
 				
-				if (line.startsWith("fullscreen=")) 
+				else if (line.startsWith("tps=")) 
+				{
+					gc.setTPS(  (1/(GetArg(line)))  );
+				}
+				
+				else if (line.startsWith("fullscreen=")) 
 				{
 					gc.setFullscreen( (int) (GetArg(line)));
 				}
@@ -60,7 +60,7 @@ public class ReadConfig {
 	// setter -> removes anything but the argument value (int) at the end
 	public double GetArg(String convar) 
 	{
-		double temp = Double.valueOf(  convar.substring( 0, convar.indexOf("="))  );
+		double temp = Double.valueOf(  convar.substring( convar.indexOf("=")+1, convar.length() )  );
 		return temp;
 	}
 	
