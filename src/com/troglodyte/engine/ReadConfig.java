@@ -2,9 +2,10 @@ package com.troglodyte.engine;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class ReadConfig {
+	
+	WriteToLog wl;
 	
 	// this will read the config files and apply them to the game
 	public ReadConfig(GameContainer gc)
@@ -21,6 +22,7 @@ public class ReadConfig {
 			{
 				line = br.readLine();
 				
+				// game settings
 				if (line.startsWith("scale=")) 
 				{
 					gc.setScale( (float) GetArg(line) );
@@ -42,17 +44,22 @@ public class ReadConfig {
 				}
 				
 				
-				// set keybinds
+				// read keybinds from config file and set keybinds
 				
 				
+				
+				
+							
 			}
 			
+			// close buffered reader and write status to log
 			br.close();
+			wl = new WriteToLog("Successfully imported player configuration", 0);
 			
 		}
 		catch (Exception e) 
 		{
-			System.out.println("\n// [!] Warning: Config file may not have been read correctly.\n\n" + LinesGoBrr(50) + "\n");
+			wl = new WriteToLog("[!] Warning: Config file may not have been read correctly", 0);
 		}
 		
 		
@@ -62,21 +69,6 @@ public class ReadConfig {
 	public double GetArg(String convar) 
 	{
 		double temp = Double.valueOf(  convar.substring( convar.indexOf("=")+1, convar.length() )  );
-		return temp;
-	}
-	
-	
-	// string go brr
-	public String LinesGoBrr(int times)
-	{
-		
-		String temp = "";
-		
-		for (int i = 0; i < times; i++) 
-		{
-			temp += "-";
-		}
-			
 		return temp;
 	}
 	

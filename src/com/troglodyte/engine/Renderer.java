@@ -10,17 +10,20 @@ public class Renderer {
 	private int[] p;	// pixels
 	private int pW, pH;	// pixel width, height
 	
+	WriteToLog wl;
 	
 	// ok
 	public Renderer(GameContainer gc) 
 	{
+		wl = new WriteToLog("Started renderer", 0);
+		
 		// get this bish
 		pW = gc.getWidth();
 		pH = gc.getHeight();
 		
 		// gives p array access to pixel data from image in window class:
 		p = ( (DataBufferInt) gc.getWindow().getImage().getRaster().getDataBuffer() ).getData();
-			
+		
 	}
 	
 	
@@ -30,8 +33,8 @@ public class Renderer {
 		for(int i = 0; i < p.length; i++) {
 //			p[i] = 0xFF000000;
 			p[i] += i;
-			
 		}
+		
 	}
 	
 	

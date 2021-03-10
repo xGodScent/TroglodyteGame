@@ -24,6 +24,7 @@ public class Window {
 	private Canvas canvas;			// engine will draw on this
 	private Graphics g;				// graphics object
 	
+	private WriteToLog wl;
 	
 	// ok
 	public Window(GameContainer gc) 
@@ -65,7 +66,8 @@ public class Window {
 		canvas.createBufferStrategy(2);			// 2 buffers to render to
 		bstrat = canvas.getBufferStrategy();	// bstrat type shit
 		g = bstrat.getDrawGraphics();			// get graphics we need to draw
-			
+		
+		wl = new WriteToLog("Created game window", 0);
 	}
 	
 	// updates window
