@@ -28,7 +28,8 @@ public class Renderer {
 	public void clear() 
 	{
 		for(int i = 0; i < p.length; i++) {
-			p[i] = 0xFF000000;
+//			p[i] = 0xFF000000;
+			p[i] += i;
 			
 		}
 	}

@@ -20,12 +20,13 @@ public class GameContainer implements Runnable {
 	
 	// sets game vars
 	private boolean running = false;		// makes sure we're not running the game yet
-	private final double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
+	private double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
 	private String version = "0.0.1";
 	
 	// window vars
 	private int width = 640, height = 360;
 	private float scale = 1F;
+	private int fullscreen = 0;
 	private String windowTitle = "Troglodyte" + " v" + version;
 	
 	
@@ -193,6 +194,26 @@ public class GameContainer implements Runnable {
 
 	public Window getWindow() {
 		return window;
+	}
+
+
+	public double getTPS() {
+		return TPS;
+	}
+
+
+	public void setTPS(double tPS) {
+		TPS = tPS;
+	}
+
+
+	public int getFullscreen() {
+		return fullscreen;
+	}
+
+
+	public void setFullscreen(int fullscreen) {
+		this.fullscreen = fullscreen;
 	}
 	
 	
