@@ -3,7 +3,7 @@
 Meaning of Troglodyte: a hermit - > a hummingbird found in the shady lower layers of tropical forests, foraging along a regular route.
 
 -Story:
-You're an astronaut, you had a big party last night. You leave early because you have cleaning routine tomorrow.
+You're an astronaut on a space ship, you had a big party last night. You leave early because you have cleaning routine tomorrow.
 You go to sleep. You wake up: you're the only person left on the space ship. Everyone seems to have dissapeared.
 
 You want to find out why everbody is gone.
@@ -11,6 +11,21 @@ So you start investigating by trying to find pictures, clues etc to find out wha
 -First findings in your room:
  -> Picture of you and your friends last night.
 
+
+
+-Characters (in total 12 people):
+  -  MC : NAME (You)
+2. -> 
+3. -> 
+4. -> 
+5. -> 
+6. -> 
+7. -> 
+8. -> 
+9. -> 
+10. -> 
+11. -> 
+12. -> 
 
 
 -Scenery:
