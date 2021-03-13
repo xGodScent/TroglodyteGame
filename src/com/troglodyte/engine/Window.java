@@ -6,10 +6,13 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -29,6 +32,7 @@ public class Window {
 	private JLabel fps_counter = new JLabel("FPS: ");
 	
 	private GameContainer gc;
+	private Dimension windowSize;
 	
 	// ok
 	public Window(GameContainer gc) 
@@ -37,31 +41,55 @@ public class Window {
 		frame = new JFrame(gc.getWindowTitle());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
+		frame.setUndecorated(true);
+		frame.setAutoRequestFocus(true);
+		
+		windowSize = new Dimension( (int) (gc.getWidth() * gc.getScale()), (int) (gc.getHeight() * gc.getScale()) );
+		
+		// chnage window to full screen if read in config file
+		if (gc.getFullscreen() == 1) {
+	
+			windowSize = Toolkit.getDefaultToolkit().getScreenSize();
+			
+			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+			
+			gc.setWidth((int) windowSize.getHeight());
+			gc.setHeight((int) windowSize.getHeight());
+			gc.setScale((float) 1.0F);
+			
+			
+		}
 		
 		// create canvas
 		image = new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);	// creates buffered image + sets type
 		canvas = new Canvas();
-		Dimension windowSize = new Dimension( (int) (gc.getWidth() * gc.getScale()), (int) (gc.getHeight() * gc.getScale()) );
 		
 		canvas.setMinimumSize(windowSize);
 		canvas.setMaximumSize(windowSize);
 		canvas.setPreferredSize(windowSize);
 		
-		// chnage window to full screen if read in config file
-		if (gc.getFullscreen() == 1) {
-	
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			
-			canvas.setMinimumSize(screenSize);
-			canvas.setMaximumSize(screenSize);
-			canvas.setPreferredSize(screenSize);
-			
-			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-			frame.setUndecorated(true);
-			
-			frame.setAutoRequestFocus(true);
-			
-		}
+		System.out.println(gc.getWidth());
+		
+		// create exit button
+		int btnW = (int) (40*gc.getScale());
+		int btnH = (int) (20*gc.getScale());
+				
+		System.out.println((int) ((gc.getWidth()*gc.getScale())-btnW));
+		
+		JButton exit_button = new JButton("X");
+		exit_button.setBounds(
+				((int) ((gc.getWidth()*gc.getScale())-btnW)), 
+				0, 
+				btnW,
+				btnH
+				);
+		frame.add(exit_button);
+				
+		exit_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gc.stop();		
+			}});
 		
 		// set game icon
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(".\\resources\\icons\\game_icon.png"));
@@ -98,6 +126,11 @@ public class Window {
 		
 	}
 	
+	public void close() {
+		frame.dispose();
+	}
+	
+	
 	
 	// !--------------------------------------------------------------------!
 	
@@ -110,7 +143,6 @@ public class Window {
 	public Canvas getCanvas() {
 		return canvas;
 	}
-	
-	
-	
+
+		
 }

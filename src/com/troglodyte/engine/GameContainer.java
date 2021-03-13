@@ -1,6 +1,7 @@
 // package
 package com.troglodyte.engine;
 
+import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -71,7 +72,8 @@ public class GameContainer implements Runnable {
 	
 	public void stop() 
 	{
-			
+		this.thread.stop();
+		this.dispose();
 	}
 	
 	// runs game
@@ -142,7 +144,7 @@ public class GameContainer implements Runnable {
 				{
 					Thread.sleep(1);	// frees up the CPU -> releases some processor usage
 					
-				} catch (InterruptedException e) { e.printStackTrace(); }
+				} catch (InterruptedException e) { e.printStackTrace(); running = false; }
 				
 			} // else
 				
@@ -155,7 +157,13 @@ public class GameContainer implements Runnable {
 	
 	private void dispose() 
 	{
+		renderer.clear();
+		window.close();
 		
+		wl = new WriteToLog("Closed game", 0);
+		System.out.println("Closing game...");
+		
+		System.exit(0);
 	}
 
 	
