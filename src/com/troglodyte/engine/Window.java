@@ -89,7 +89,7 @@ public class Window {
 	{
 			
 		// if we are not in the game, we pause -> maybe we should call the pause/menu ?
-		while (!frame.isActive()) {
+		if (!frame.isActive()) {
 			try { Thread.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		
