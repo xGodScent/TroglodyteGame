@@ -49,8 +49,18 @@ public class Window {
 		
 		// chnage window to full screen if read in config file
 		if (gc.getFullscreen() == 1) {
+	
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			
+			canvas.setMinimumSize(screenSize);
+			canvas.setMaximumSize(screenSize);
+			canvas.setPreferredSize(screenSize);
+			
 			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 			frame.setUndecorated(true);
+			
+			frame.setAutoRequestFocus(true);
+			
 		}
 		
 		// set game icon
@@ -77,8 +87,11 @@ public class Window {
 	// updates window
 	public void update() 
 	{
-		// update window title
-		g.drawString("kaas", 200, 200);
+			
+		// if we are not in the game, we pause -> maybe we should call the pause/menu ?
+		while (!frame.isActive()) {
+			try { Thread.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); }
+		}
 		
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);	// draw that mf canvas through graphics obj
 		bstrat.show();															// show that mf using the buffered strategy

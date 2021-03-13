@@ -67,7 +67,8 @@ public class Renderer {
 		// draw gay ass background type shit
 		for(int i = 0; i < p.length; i++) 
 		{
-			p[i] = 50;
+//			p[i] = 50;
+			p[i] += i;
 		}
 		
 		
