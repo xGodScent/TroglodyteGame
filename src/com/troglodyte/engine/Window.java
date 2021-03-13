@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
 // $Window
@@ -25,6 +26,9 @@ public class Window {
 	private Graphics g;				// graphics object
 	
 	private WriteToLog wl;
+	private JLabel fps_counter = new JLabel("FPS: ");
+	
+	private GameContainer gc;
 	
 	// ok
 	public Window(GameContainer gc) 
@@ -73,10 +77,11 @@ public class Window {
 	// updates window
 	public void update() 
 	{
+		// update window title
+		g.drawString("kaas", 200, 200);
+		
 		g.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);	// draw that mf canvas through graphics obj
 		bstrat.show();															// show that mf using the buffered strategy
-		
-		
 		
 	}
 	

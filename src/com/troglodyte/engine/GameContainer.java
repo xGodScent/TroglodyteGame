@@ -29,12 +29,13 @@ public class GameContainer implements Runnable {
 	private double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
 	private int MAXFPS = 60;
 	private String version = "0.0.1";
+	private int fps;
 	
 	// window vars
 	private int width = 640, height = 360;
 	private float scale = 1F;
 	private int fullscreen = 0;
-	private String windowTitle = "Troglodyte" + " v" + version;
+	private String windowTitle = "Troglodyte v" + version;
 	
 	
 	// log file setup
@@ -129,6 +130,8 @@ public class GameContainer implements Runnable {
 			{
 				// lets game render
 				renderer.clear();
+				
+				// update window
 				window.update();
 				
 				// frames int go brr
@@ -246,6 +249,14 @@ public class GameContainer implements Runnable {
 
 	public String getDt() {
 		return dtf.format(now);
+	}
+
+	public int getFps() {
+		return fps;
+	}
+
+	public String getVersion() {
+		return version;
 	}
 	
 	

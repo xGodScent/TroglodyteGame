@@ -31,7 +31,7 @@ public class WriteToLog {
 			
 			
 			// out
-			FinalMSG = "~" + dt + " [ (!) $Engine ] : " + msg + ";";
+			FinalMSG = "~" + dt + " [ $Engine/$DEBUG ] : " + msg + ";";
 			
 			if (close_game == 0) // -> we store msg in log
 			{

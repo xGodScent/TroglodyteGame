@@ -1,0 +1,4 @@
+~11-03-2021_20-10-12 [ $Engine/$DEBUG ] : Ran startup;
+~11-03-2021_20-10-12 [ $Engine/$DEBUG ] : [!] Warning: Config file may not have been read correctly;
+~11-03-2021_20-10-12 [ $Engine/$DEBUG ] : Created game window;
+~11-03-2021_20-10-12 [ $Engine/$DEBUG ] : Started renderer;
