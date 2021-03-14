@@ -34,7 +34,7 @@ public class Window {
 	private GameContainer gc;
 	private Dimension windowSize;
 	
-	// ok
+	// TODO: add fps counter
 	public Window(GameContainer gc) 
 	{
 		// create jframe window
@@ -79,7 +79,7 @@ public class Window {
 		);
 		exit_button.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
-				
+		
 		exit_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,6 +94,7 @@ public class Window {
 			btnW,
 			btnH
 		);
+		cw_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		cw_button.addActionListener(new ActionListener() {
 			@Override

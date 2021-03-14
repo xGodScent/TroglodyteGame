@@ -1,9 +1,13 @@
 // package
 package com.troglodyte.engine;
 
-import java.awt.Frame;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 
 // $GameContainer
 // $GC
@@ -29,7 +33,7 @@ public class GameContainer implements Runnable {
 	private boolean running = false;		// makes sure we're not running the game yet
 	private double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
 	private int MAXFPS = 60;
-	private String version = "0.0.1";
+	private String version = "0.0.2";
 	private int fps;
 	
 	// window vars
@@ -47,16 +51,20 @@ public class GameContainer implements Runnable {
 	
 	
 	// ok
-	public GameContainer() {
+	public GameContainer() 
+	{
 		
 	}
 	
 	// $Start
 	public void start() 
-	{
-		// log (wood?) -> first argument=msg - second argument=close or not -> 0|1 (if we close it, it will be saved in a crashreport)
-		cf = new CreateFile(".\\logs\\", "log__" + dt + "__.log");
-		wl = new WriteToLog("Ran startup", 0);
+	{	
+		// clear latest.log
+		try {
+			FileWriter fw = new FileWriter(".\\logs\\latest.log");
+			fw.write("");
+			fw.close();   
+		} catch (IOException e) { e.printStackTrace(); }
 		
 		
 		// lame ass shit
@@ -68,12 +76,29 @@ public class GameContainer implements Runnable {
 		
 		thread = new Thread(this);	// yk
 		thread.run();				// calls:  public void run() 
+		
+		// log (wood?) -> first argument=msg - second argument=close or not -> 0|1 (if we close it, it will be saved in a crashreport)
+		wl = new WriteToLog("Ran startup", 0);
+		
 	}	
 	
-	public void stop() 
+	@SuppressWarnings("deprecation")
+	public void stop()
 	{
+		try { copyLog(); } catch (Exception e) { e.printStackTrace(); }
+		
 		this.thread.stop();
 		this.dispose();
+	}
+	
+
+	private void copyLog() throws Exception
+	{
+		// copy latest.log file to other thingy		
+		File latest_log = new File(".\\logs\\latest.log");
+		File to_log = new File(".\\logs\\", "log__" + dt + "__.log");
+
+		Files.copy(latest_log.toPath(), to_log.toPath());
 	}
 	
 	// runs game
@@ -160,8 +185,8 @@ public class GameContainer implements Runnable {
 		renderer.clear();
 		window.close();
 		
-		wl = new WriteToLog("Closed game", 0);
 		System.out.println("Closing game...");
+		wl = new WriteToLog("Closed game", 0);
 		
 		System.exit(0);
 	}

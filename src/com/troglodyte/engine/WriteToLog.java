@@ -13,6 +13,8 @@ public class WriteToLog {
 	GameContainer gc = new GameContainer();
 	CreateFile cf;
 	
+	
+	// TODO: fix: we need to make it write to one file only, not different files.
 	public WriteToLog(String msg, int close_game) {
 		
 		// close_game = 0 -> Doesnt close game	| writes to log
@@ -35,7 +37,7 @@ public class WriteToLog {
 			
 			if (close_game == 0) // -> we store msg in log
 			{
-				path = ".\\logs\\log__" + gc.dt + "__.log";
+				path = ".\\logs\\latest.log";
 				
 				FileWriter fw = new FileWriter(path, true);
 				fw.write(FinalMSG+"\n");

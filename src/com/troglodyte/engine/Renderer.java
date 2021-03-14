@@ -63,12 +63,12 @@ public class Renderer {
 	// it uh, clears the screen *thumbs up*
 	public void clear() 
 	{
-		
+			
 		// draw gay ass background type shit
 		for(int i = 0; i < p.length; i++) 
 		{
-//			p[i] = 50;
-			p[i] += i;
+			p[i] = 50;
+//			p[i] += i;
 		}
 		
 		
