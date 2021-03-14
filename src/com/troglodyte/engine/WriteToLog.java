@@ -10,7 +10,7 @@ import java.io.FileWriter;
 // handles errors and stores them in the correct files
 public class WriteToLog {
 	
-	GameContainer gc = new GameContainer();
+	GameContainer gc;
 	CreateFile cf;
 	
 	
@@ -62,7 +62,6 @@ public class WriteToLog {
 					fw.close();
 					
 					// close game
-					gc = new GameContainer();
 					gc.stop();
 					
 					System.exit(0);

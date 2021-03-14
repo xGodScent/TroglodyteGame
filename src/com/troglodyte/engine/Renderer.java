@@ -1,8 +1,10 @@
 package com.troglodyte.engine;
 
-import java.awt.Font;
+import java.awt.Image;
 import java.awt.image.DataBufferInt;
 import java.util.Random;
+
+import com.troglodyte.engine.gfx.LoadImage;
 
 // $Renderer
 // game rendered type shit
@@ -39,23 +41,17 @@ public class Renderer {
 		p[x + y * pW] = value;
 		
 	}
+
 	
-	public void drawText(String text, int offX, int offY, int color)
+	public void drawImage(LoadImage image, int offX, int offY) 
 	{
-		text = text.toUpperCase();
-		int offset = 0;
-		
-		for (int i = 0; i < text.length(); i++)
+		for (int x = 0; x < image.getW(); x++)
 		{
-			int unicode = text.codePointAt(i);
-			
-//			for (int y = 0; y < )
-//			{
-//				
-//			}
-			
+			for (int y = 0; y < image.getH(null); y++)
+			{
+				setPixel(x + offX, y + offY, image.getP()[x + y * image.getW()]);
+			}
 		}
-		
 	}
 	
 	
@@ -68,7 +64,6 @@ public class Renderer {
 		for(int i = 0; i < p.length; i++) 
 		{
 			p[i] = 50;
-//			p[i] += i;
 		}
 		
 		

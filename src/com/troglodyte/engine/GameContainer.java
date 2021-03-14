@@ -1,6 +1,7 @@
 // package
 package com.troglodyte.engine;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,6 +30,11 @@ public class GameContainer implements Runnable {
 	// creates WriteToLog object 
 	private WriteToLog wl;
 	
+	private Input input;
+	
+	// ok
+	private AbstractGame game;
+	
 	// sets game vars
 	private boolean running = false;		// makes sure we're not running the game yet
 	private double TPS = 1.0/60.0;	// ticks per second -> how often the game updates per second : update cap
@@ -51,9 +57,9 @@ public class GameContainer implements Runnable {
 	
 	
 	// ok
-	public GameContainer() 
+	public GameContainer(AbstractGame game) 
 	{
-		
+		this.game = game;
 	}
 	
 	// $Start
@@ -73,6 +79,8 @@ public class GameContainer implements Runnable {
 		// real shit
 		window = new Window(this);		// create window for THIS game
 		renderer = new Renderer(this);	// create renderer for THIS game
+		
+		input = new Input(this);
 		
 		thread = new Thread(this);	// yk
 		thread.run();				// calls:  public void run() 
@@ -137,6 +145,17 @@ public class GameContainer implements Runnable {
 				unprocessedTime -= TPS;
 				render = true;
 				
+				
+				game.update(this, (float) TPS);
+				
+				// ok
+				if (input.isKey(KeyEvent.VK_B))
+				{
+					System.out.println("your mom is pressed lulz");
+				}
+				
+				input.update();
+				
 				// fps counter
 				if (frameTime >= 1.0) 
 				{
@@ -147,8 +166,6 @@ public class GameContainer implements Runnable {
 					System.out.println("FPS: " +  FPS);
 				}
 				
-				// TODO: update game
-				
 			}
 			
 			// $Render
@@ -157,6 +174,9 @@ public class GameContainer implements Runnable {
 			{
 				// lets game render
 				renderer.clear();
+				
+				//
+				game.render(this, renderer);
 				
 				// update window
 				window.update();
@@ -193,15 +213,6 @@ public class GameContainer implements Runnable {
 
 	
 	// !--------------------------------------------------------------------!
-	
-	// MAIN METHOD -> starts program.
-	public static void main(String[] args) 
-	{
-		GameContainer gc = new GameContainer();
-		gc.start();
-	}
-
-	
 	
 	
 	// getters and setters  ->  makes sure other classes can access these container variables
@@ -290,6 +301,10 @@ public class GameContainer implements Runnable {
 
 	public String getVersion() {
 		return version;
+	}
+
+	public Input getInput() {
+		return input;
 	}
 	
 	

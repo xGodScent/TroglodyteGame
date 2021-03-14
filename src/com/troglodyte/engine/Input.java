@@ -51,36 +51,70 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 		for (int i = 0; i < NUM_OF_KEYS; i++) 
 		{
 			keysLast[i] = keys[i];
-			
-			
 		}
 		
 		for (int i = 0; i < NUM_OF_BUTTONS; i++) 
 		{
 			buttonsLast[i] = buttons[i];
-			
-			
 		}
 		
 			
 	}
 	
 
+	public boolean isKey(int keyCode) 
+	{
+		return keys[keyCode];
+	}
+	
+	public boolean isKeyUp(int keyCode) 
+	{
+		return !keys[keyCode] && keysLast[keyCode];
+	}
+	
+	public boolean isKeyDown(int keyCode) 
+	{
+		return keys[keyCode] && !keysLast[keyCode];
+	}
+	
+	
+	public boolean isButton(int button) 
+	{
+		return buttons[button];
+	}
+	
+	public boolean isButtonUp(int button) 
+	{
+		return !buttons[button] && buttonsLast[button];
+	}
+	
+	public boolean isButtonDown(int button) 
+	{
+		return buttons[button] && !buttonsLast[button];
+	}
+	
+	
+	
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		
-		
+	public void mouseWheelMoved(MouseWheelEvent e) 
+	{
+		scroll = e.getWheelRotation();
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		
-		
+	public void mouseDragged(MouseEvent e) 
+	{
+		// TODO: fix this for full screen
+		mouseX = (int) (e.getX() / gc.getScale());
+		mouseY = (int) (e.getY() / gc.getScale());
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		
+	public void mouseMoved(MouseEvent e) 
+	{
+		// TODO: fix this for full screen
+		mouseX = (int) (e.getX() / gc.getScale());
+		mouseY = (int) (e.getY() / gc.getScale());
 		
 	}
 
@@ -138,6 +172,21 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	public void keyTyped(KeyEvent e) {
 		
 		
+	}
+
+
+	public int getMouseX() {
+		return mouseX;
+	}
+
+
+	public int getMouseY() {
+		return mouseY;
+	}
+
+
+	public int getScroll() {
+		return scroll;
 	}
 	
 }
