@@ -16,6 +16,7 @@ public class GameManager extends AbstractGame
 		image = new LoadImage(".\\resources\\scene\\test\\image.png");
 	}
 	
+	@Override
 	public void render(GameContainer gc, Renderer r)
 	{
 //		r.drawImage(image, , offY);
@@ -23,17 +24,19 @@ public class GameManager extends AbstractGame
 		
 	}
 	
-	public static void main(String[] args) 
-	{
-		GameContainer gc = new GameContainer(new GameManager());
-		gc.start();
-	}
 
 	@Override
 	public void update(GameContainer gc, float dt) 
 	{
 
 		
+	}
+	
+	
+	public static void main(String[] args) 
+	{
+		GameContainer gc = new GameContainer(new GameManager());
+		gc.start();
 	}
 	
 	

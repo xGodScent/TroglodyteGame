@@ -48,6 +48,8 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	// update loop for input
 	public void update() 
 	{
+		scroll = 0;
+		
 		for (int i = 0; i < NUM_OF_KEYS; i++) 
 		{
 			keysLast[i] = keys[i];
