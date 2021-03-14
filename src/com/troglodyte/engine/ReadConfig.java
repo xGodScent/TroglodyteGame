@@ -43,6 +43,16 @@ public class ReadConfig {
 					gc.setFullscreen( (int) (GetArg(line)));
 				}
 				
+				else if (line.startsWith("ww=")) 
+				{
+					gc.setWidth( (int) (GetArg(line)));
+				}
+				
+				else if (line.startsWith("wh=")) 
+				{
+					gc.setHeight( (int) (GetArg(line)));
+				}
+				
 				
 				// read keybinds from config file and set keybinds
 				

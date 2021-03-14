@@ -1,2 +1,3 @@
 -What is this?:
 This folder is destined for configuration files. -> All configuration files have the extension: .cfg
+□

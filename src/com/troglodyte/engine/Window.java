@@ -4,6 +4,7 @@ package com.troglodyte.engine;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,8 +44,6 @@ public class Window {
 		frame.setUndecorated(true);
 		frame.setAutoRequestFocus(true);
 		
-		windowSize = new Dimension( (int) (gc.getWidth() * gc.getScale()), (int) (gc.getHeight() * gc.getScale()) );
-		
 		// chnage window to full screen if read in config file
 		if (gc.getFullscreen() == 1) {
 	
@@ -53,12 +51,11 @@ public class Window {
 			
 			frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 			
-			gc.setWidth((int) windowSize.getHeight());
+			gc.setWidth((int) windowSize.getWidth());
 			gc.setHeight((int) windowSize.getHeight());
 			gc.setScale((float) 1.0F);
 			
-			
-		}
+		} else { windowSize = new Dimension( (int) (gc.getWidth() * gc.getScale()), (int) (gc.getHeight() * gc.getScale()) ); }
 		
 		// create canvas
 		image = new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);	// creates buffered image + sets type
@@ -68,28 +65,101 @@ public class Window {
 		canvas.setMaximumSize(windowSize);
 		canvas.setPreferredSize(windowSize);
 		
-		System.out.println(gc.getWidth());
 		
 		// create exit button
 		int btnW = (int) (40*gc.getScale());
 		int btnH = (int) (20*gc.getScale());
-				
-		System.out.println((int) ((gc.getWidth()*gc.getScale())-btnW));
 		
 		JButton exit_button = new JButton("X");
 		exit_button.setBounds(
-				((int) ((gc.getWidth()*gc.getScale())-btnW)), 
-				0, 
-				btnW,
-				btnH
-				);
-		frame.add(exit_button);
+			((int) ((gc.getWidth()*gc.getScale())-btnW)), 
+			0, 
+			btnW,
+			btnH
+		);
+		exit_button.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
 				
 		exit_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				gc.stop();		
+				gc.stop();
 			}});
+		
+		// create change window size button
+		JButton cw_button = new JButton("□");
+		cw_button.setBounds(
+			((int) ((gc.getWidth()*gc.getScale())-(btnW*2))), 
+			0, 
+			btnW,
+			btnH
+		);
+		
+		cw_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if (gc.getFullscreen() == 1) {
+					
+					ReadConfig rc = new ReadConfig(gc);			
+					gc.setWidth((int) (gc.getWidth()*gc.getScale()));
+					gc.setHeight((int) (gc.getHeight()*gc.getScale()));
+					
+					frame.setSize(gc.getWidth(), gc.getHeight());
+					frame.setLocationRelativeTo(null);
+					
+					// update buttons
+					exit_button.setBounds(
+						(int) (gc.getWidth()-btnW), 
+						0, 
+						btnW,
+						btnH
+					);
+					
+					cw_button.setBounds(
+						(int) (gc.getWidth()-(btnW*2)), 
+						0, 
+						btnW,
+						btnH
+					);
+					
+					gc.setFullscreen(0);
+					wl = new WriteToLog("Set screensize to windowed", 0);
+					
+				} else {
+					
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					
+					gc.setWidth((int) windowSize.getWidth());
+					gc.setHeight((int) windowSize.getHeight());
+					gc.setScale((float) 1.0F);
+					
+					gc.setFullscreen(1);
+					
+					exit_button.setBounds(
+						(int) (gc.getWidth()-btnW), 
+						0, 
+						btnW,
+						btnH
+					);
+					
+					cw_button.setBounds(
+						(int) (gc.getWidth()-(btnW*2)), 
+						0, 
+						btnW,
+						btnH
+					);
+					
+					wl = new WriteToLog("Set screensize to fullscreen", 0);
+					
+				}
+				
+			}});
+		
+		
+		// add buttons to frame
+		frame.add(exit_button);
+		frame.add(cw_button);
 		
 		// set game icon
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(".\\resources\\icons\\game_icon.png"));
